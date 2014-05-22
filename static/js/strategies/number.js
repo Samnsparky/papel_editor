@@ -1,17 +1,17 @@
 /*
- * Controller strategy for text input.
+ * Controller strategy for number input.
  *
  * Note: This strategy is a terminal node.
  */
-var text_strategy = {
+var number_strategy = {
 
     matches: function (model) {
-        return model.type !== undefined && model.type === 'text';
+        return model.type !== undefined && model.type === 'number';
     },
 
     createController: function (model, innerOnDelete) {
         var view = null;
-        var template = $('#text-input-template').html();
+        var template = $('#number-input-template').html();
         Mustache.parse(template);
 
         var retObj = {
@@ -19,10 +19,12 @@ var text_strategy = {
                 var rendered = Mustache.render(template,
                     {
                         'type': model.type,
-                        'type_text': true,
+                        'type_number': true,
                         'name': model.name,
                         'show_caption': model.showCaption,
                         'required': model.required,
+                        'min': model.min,
+                        'max': model.max,
                         'size': model.size,
                         'size_selects' : createSizeSelects(model.size),
                         'default': model.default,
@@ -33,6 +35,8 @@ var text_strategy = {
                         'name',
                         'show_caption',
                         'required',
+                        'min',
+                        'max',
                         'size',
                         'default',
                     ])
@@ -55,18 +59,20 @@ var text_strategy = {
                 model.name = view.find('.name-input').val();
                 model.showCaption = view.find('.show-caption-input').is(':checked');
                 model.required = view.find('.required-input').is(':checked');
+                model.min = view.find('.min-input').val();
+                model.max = view.find('.max-input').val();
                 model.size = view.find('.size-input').val();
                 model._default = view.find('.default-input').val();
             },
 
-            onDelete: function (event) {
+            onDelete: function () {
                 view.remove();
                 innerOnDelete(retObj);
                 signalSave();
             },
 
             validateInput: function () {
-                console.log('contoller text input validateInput stub');
+                console.log('contoller number input validateInput stub');
                 return true;
             },
 
@@ -76,6 +82,8 @@ var text_strategy = {
                     'name': model.name,
                     'showCaption': model.showCaption,
                     'required': model.required,
+                    'min': model.min,
+                    'max': model.max,
                     'size': model.size,
                     'default': model._default,
                 };

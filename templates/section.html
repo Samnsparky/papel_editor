@@ -1,0 +1,13 @@
+<script id="section-template" type="x-tmpl-mustache">
+<div class="row">
+    <div class="col-xs-1">
+        <span>Section</span>
+        {{> delete_button_partial }}
+    </div>
+    <div class="col-xs-11">
+        {{#subsections}}
+        <div class="subsection-content"></div>
+        {{/subsections}}
+    </div>
+</div>
+</script>

@@ -9,6 +9,7 @@
 <script type="text/javascript" language="javascript" src="/static/js/strategies/section.js"></script>
 <script type="text/javascript" language="javascript" src="/static/js/strategies/text.js"></script>
 <script type="text/javascript" language="javascript" src="/static/js/strategies/dropdown.js"></script>
+<script type="text/javascript" language="javascript" src="/static/js/strategies/number.js"></script>
 <script type="text/javascript" language="javascript" src="/static/js/strategies/date.js"></script>
 <script type="text/javascript" language="javascript" src="/static/js/strategies/phone_number.js"></script>
 <script type="text/javascript" language="javascript" src="/static/js/strategies/enumeration_table.js"></script>
@@ -16,106 +17,11 @@
 
 <script type="text/javascript" language="javascript" src="/static/js/papel_editor.js"></script>
 
-{% raw %}
-
-<script id="text-input-template" type="x-tmpl-mustache">
-    <div class="row">
-        <div class="col-xs-1">
-            <span>Text Input</span>
-            <button type="button" class="btn btn-xs btn-danger delete-button">
-                <span class="glyphicon glyphicon-trash"></span>
-            </button>
-        </div>
-        <div class="col-xs-7">
-            <form>
-                <div class="form-group">
-                    <label for="name-input">Name</label>
-                    <input type="text" class="name-input form-control" value="{{ name }}" placeholder="ex: First Name">
-                </div>
-                <div class="checkbox">
-                    <label><input class="required-input" type="checkbox" value="{{ required }}"
-                    {{#required}}checked{{/required}}
-                    >Required</label>
-                </div>
-                <label>Input type:
-                    <select class="type-input form-control">
-                        <option{{#type_text}} selected="selected"{{/type_text}}>Text</option>
-                        <option{{#type_date}} selected="selected"{{/type_date}}>Date</option>
-                        <option{{#type_phone_number}} selected="selected"{{/type_phone_number}}>Phone Number</option>
-                        <option{{#type_number}} selected="selected"{{/type_number}}>Number</option>
-                        <option{{#type_dropdown}} selected="selected"{{/type_dropdown}}>Dropdown</option>
-                        <option{{#type_essay}} selected="selected"{{/type_essay}}>Essay</option>
-                        <option{{#type_enumeration_table}} selected="selected"{{/type_enumeration_table}}>Enumeration Table</option>
-                        <option{{#type_dropdown_with_sub_fields}} selected="selected"{{/type_dropdown_with_sub_fields}}>Dropdown With Sub Fields</option>
-                    </select>
-                </label>
-                <label>Input size:
-                    <select class="size-input form-control">
-                        <option{{#size_selects.small}} selected="selected"{{/size_selects.small}}>Small</option>
-                        <option{{#size_selects.medium}} selected="selected"{{/size_selects.medium}}>Medium</option>
-                        <option{{#size_selects.large}} selected="selected"{{/size_selects.large}}>Large</option>
-                    </select>
-                </label>
-
-                <div class="form-group">
-                    <label for="default-input">Default</label>
-                    <input type="text" class="default-input form-control" value="{{ default }}">
-                </div>
-                <div class="row checkbox">
-                    <div class="col-xs-3">
-                        <label><input class="show-caption-input" type="checkbox" value="{{ show_caption }}" {{# show_caption }}checked{{/ show_caption }}>Show caption</label>
-                    </div>
-                    <div class="col-xs-1">
-                        <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#show-caption-help-modal">
-                            <span class="glyphicon glyphicon-question-sign"></span>
-                        </button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-</script>
-
-<script id="subsection-template" type="x-tmpl-mustache">
-{{#fields}}
-<div class="field-content"></div>
-{{/fields}}
-</script>
-
-<script id="section-template" type="x-tmpl-mustache">
-{{#subsections}}
-<div class="subsection-content"></div>
-{{/subsections}}
-</script>
-
-<script id="application-editor-template" type="x-tmpl-mustache">
-    <h2>Application: {{ name }}</h2>
-    <form>
-        <div class="form-group">
-            <label for="open-date-input">Open Date</label>
-            <input id="open-date-input" type="date" class="form-control" value="{{ openDate }}">
-        </div>
-        <div class="form-group">
-            <label for="open-date-human-input">Open Date Human</label>
-            <input id="open-date-human-input" type="text" class="form-control" value="{{ openDateHuman }}">
-        </div>
-        <div class="form-group">
-            <label for="close-date-input">Close Date</label>
-            <input id="close-date-input" type="date" class="form-control" value="{{ closeDate }}">
-        </div>
-        <div class="form-group">
-            <label for="close-date-human-input">Close Date Human</label>
-            <input id="close-date-human-input" type="text" class="form-control" value="{{ closeDateHuman }}">
-        </div>
-    </form>
-    <div class="section-content">Sections loading...</div>
-</script>
-
-<script id="section-content-template" type="x-tmpl-mustache">
-loading section
-</script>
-
-{% endraw %}
+{{ application_editor|safe }}
+{{ section|safe }}
+{{ subsection|safe }}
+{{ fields|safe }}
+{{ components|safe }}
 
 {% endblock %}
 

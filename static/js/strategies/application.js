@@ -1,11 +1,3 @@
-var text_structure = {
-    name: '',
-    type: 'text',
-    size: 'medium',
-    required: true,
-    _default: undefined,
-    showCaption: true
-};
 
 var application_structure = {
     name: 'Application Name',
@@ -33,6 +25,43 @@ var application_structure = {
                         "size": "large",
                         "showCaption": false,
                         "default": "hello default"
+                    },
+                    {
+                        "name": "Birthday",
+                        "required": false,
+                        "type": "date",
+                        "showCaption": true
+                    },
+                    {
+                        "name": "Home phone",
+                        "required": true,
+                        "type": "phoneNumber",
+                        "size": "medium",
+                        "showCaption": true
+                    },
+                    {
+                        "name": "SAT Mathematics Score",
+                        "showCaption": true,
+                        "type": "number",
+                        "required": true,
+                        "min": 200,
+                        "max": 800,
+                        "size": "medium",
+                        "default": "SAT DEFAULT HERE"
+                    },
+                    {
+                        "name": "Gender",
+                        "showCaption": true,
+                        "required": true,
+                        "type": "dropdown",
+                        "options": [
+                            "Female",
+                            "Male",
+                            "Intersex",
+                            "Other",
+                            "Choose not to disclose"
+                        ],
+                        "allowFreeText": true
                     }
                 ]
             ]
@@ -48,11 +77,20 @@ var application_strategy = {
     createController: function (model) {
         var view = null;
         var template = null;
-        var sections = [];
+        var sectionControllers = [];
 
-        sectionControllers = model.sections.map(function(sectionMember) {
-            return createController(sectionMember);
-        });
+        // Add the results of the map operation to the end of controllers array,
+        // rather than creating a new array. (Not adding the results would make
+        // the controllers array reference in the inner on delete function useless).
+        Array.prototype.push.apply(
+            sectionControllers,
+            model.sections.map(function(section) {
+                return createController(
+                    section,
+                    createInnerOnDelete(model, section, sectionControllers)
+                );
+            })
+        );
 
         return {
             setTemplate: function (newTemplate) {
@@ -86,15 +124,11 @@ var application_strategy = {
                 model.closeDate = view.find('#close-date-input').val();
                 model.closeDateHuman = view.find('#close-date-human-input').val();
 
-                sectionControllers.forEach(function (controller) {
-                    controller.onSave();
-                });
+                forEachOnSave(sectionControllers);
             },
 
             onDelete: function () {
-                sectionControllers.forEach(function (controller) {
-                    controller.onDelete();
-                });
+                forEachOnDelete(sectionControllers);
             },
 
             validateInput: function () {

@@ -1,0 +1,121 @@
+
+<script id="text-input-template" type="x-tmpl-mustache">
+<div class="row">
+    <div class="col-xs-1">
+        <span>Text Input</span>
+        {{> delete_button_partial }}
+    </div>
+    <div class="col-xs-7">
+        <form>
+            {{> type_partial }}
+            {{> name_partial }}
+            {{> show_caption_partial }}
+            {{> required_partial }}
+            {{> size_partial }}
+            {{> default_partial }}
+        </form>
+    </div>
+</div>
+</script>
+
+<script id="date-input-template" type="x-tmpl-mustache">
+<div class="row">
+    <div class="col-xs-1">
+        <span>Date Input</span>
+        {{> delete_button_partial }}
+    </div>
+    <div class="col-xs-7">
+        <form>
+            {{> type_partial }}
+            {{> name_partial }}
+            {{> show_caption_partial }}
+            {{> required_partial }}
+        </form>
+    </div>
+</div>
+</script>
+
+<script id="phone-number-input-template" type="x-tmpl-mustache">
+<div class="row">
+    <div class="col-xs-1">
+        <span>Phone Number Input</span>
+        {{> delete_button_partial }}
+    </div>
+    <div class="col-xs-7">
+        <form>
+            {{> type_partial }}
+            {{> name_partial }}
+            {{> show_caption_partial }}
+            {{> required_partial }}
+            {{> size_partial }}
+        </form>
+    </div>
+</div>
+</script>
+
+<script id="number-input-template" type="x-tmpl-mustache">
+<div class="row">
+    <div class="col-xs-1">
+        <span>Number Input</span>
+        {{> delete_button_partial }}
+    </div>
+    <div class="col-xs-7">
+        <form>
+            {{> type_partial }}
+            {{> name_partial }}
+            {{> show_caption_partial }}
+            {{> required_partial }}
+            {{> min_partial }}
+            {{> max_partial }}
+            {{> size_partial }}
+            {{> default_partial }}
+        </form>
+    </div>
+</div>
+</script>
+
+<script id="dropdown-input-template" type="x-tmpl-mustache">
+<div class="row">
+    <div class="col-xs-1">
+        <span>Dropdown Input</span>
+        {{> delete_button_partial }}
+    </div>
+    <div class="col-xs-7">
+        <form>
+            {{> type_partial }}
+            {{> name_partial }}
+            {{> show_caption_partial }}
+            {{> required_partial }}
+            <div class="dropdown-options-content"></div>
+            {{> allow_free_text }}
+        </form>
+    </div>
+</div>
+</script>
+
+<script id="dropdown-options-template" type="x-tmpl-mustache">
+<table class="table">
+    <tbody>
+        {{#options}}
+        <div class="dropdown-options-entry-content"></div>
+        {{/options}}
+    </tbody>
+</table>
+<div class="form-inline">
+    <input type="text" class="new-options-entry-input form-control" placeholder="Add new option">
+    <button type="button" class="add-options-entry-button form-control btn btn-default">Add option</button>
+</div>
+</script>
+
+<script id="dropdown-options-entry-template" type="x-tmpl-mustache">
+<tr>
+    <td>
+        <input type="text" class="options-entry-input form-control" value="{{ options_entry }}">
+    </td>
+    <td>
+        <button type="button" class="remove-options-entry-button form-control btn btn-danger">
+            <span class="glyphicon glyphicon-remove"></span>
+        </button>
+    </td>
+</tr>
+</script>
