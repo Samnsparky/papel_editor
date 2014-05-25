@@ -1,51 +1,43 @@
 /*
- * Controller strategy for enumeration_table input.
+ * Controller strategy for essay input.
  *
- * Note: This strategy is not a terminal node, and contains one subsection.
+ * Note: This strategy is a terminal node.
  */
-var enumeration_table_strategy = {
+var essay_strategy = {
 
     matches: function (model) {
-        return model.type !== undefined && model.type === 'enumerationTable';
+        return model.type !== undefined && model.type === 'essay';
     },
 
     createController: function (model, innerOnDelete) {
         var view = null;
-        var template = $('#enumeration-table-input-template').html();
+        var template = $('#essay-input-template').html();
         Mustache.parse(template);
 
         applyUnsetDefaults(model, {
-            'required': USE_COMMON_DEFAULT,
-            'itemType': USE_COMMON_DEFAULT,
-            'hidden': USE_COMMON_DEFAULT,
-            'fields': USE_COMMON_DEFAULT,
+            'showCaption': USE_COMMON_DEFAULT,
+            'prompt': USE_COMMON_DEFAULT,
+            'characterLimit': USE_COMMON_DEFAULT,
         });
-
-        var subsection_controller = subsection_strategy.createController(
-            model.fields,
-            createInnerOnDelete(model, model.fields)
-        );
-        subsection_controller.setTitle('Fields');
-        subsection_controller.setDeleteBehavior('clear');
 
         var retObj = {
             render: function (viewTarget) {
                 var rendered = Mustache.render(template,
                     {
                         'type': model.type,
-                        'type_enumeration_table': true,
+                        'type_essay': true,
                         'name': model.name,
-                        'required': model.required,
-                        'item_type': model.itemType,
-                        'hidden': model.hidden,
+                        'show_caption': model.showCaption,
+                        'character_limit': model.characterLimit,
+                        'prompt': model.prompt,
                     },
                     createPartials([
                         'delete_button',
                         'type',
                         'name',
-                        'required',
-                        'item_type',
-                        'hidden',
+                        'show_caption',
+                        'prompt',
+                        'character_limit',
                     ])
                 );
                 view = $(viewTarget);
@@ -59,17 +51,14 @@ var enumeration_table_strategy = {
                 // Note to self:
                 // In non-terminal models, this is where the sub models would render
                 // (after events for class buttons have been registered)
-                var subsection_destination = view.find('.subsection-content');
-                subsection_controller.render(subsection_destination);
             },
 
             onSave: function () {
                 model.type = view.find('.type-input').val();
                 model.name = view.find('.name-input').val();
-                model.required = view.find('.required-input').is(':checked');
-                model.itemType = view.find('.item-type-input').val();
-                model.hidden = view.find('.hidden-input').is(':checked');
-                subsection_controller.onSave();
+                model.showCaption = view.find('.show-caption-input').is(':checked');
+                model.characterLimit = view.find('.character-limit-input').val();
+                model.prompt = view.find('.prompt-input').val();
             },
 
             onDelete: function () {
@@ -79,7 +68,7 @@ var enumeration_table_strategy = {
             },
 
             validateInput: function () {
-                console.log('contoller enumeration_table input validateInput stub');
+                console.log('contoller essay input validateInput stub');
                 return true;
             },
 
@@ -87,13 +76,13 @@ var enumeration_table_strategy = {
                 var json = {
                     'type': model.type,
                     'name': model.name,
+                    'showCaption': model.showCaption,
                     'required': model.required,
-                    'itemType': model.itemType,
                 };
                 addIfMeaningful(model, json, [
-                    'hidden',
+                    'prompt',
+                    'characterLimit',
                 ]);
-                json['fields'] = subsection_controller.toJSON();
                 return json;
             }
         };

@@ -1,74 +1,3 @@
- // (Secret) controller strategy for subsection
- var subsection_strategy = {
-     createController: function (model, innerOnDelete) {
-        var view = null;
-        var fieldControllers = [];
-        var template = $('#subsection-template').html();
-        Mustache.parse(template);
-
-        // Add the results of the map operation to the end of controllers array,
-        // rather than creating a new array. (Not adding the results would make
-        // the controllers array reference in the inner on delete function useless).
-        Array.prototype.push.apply(
-            fieldControllers,
-            model.map(function(field, index, array) {
-                return createController(
-                    field,
-                    createInnerOnDelete(model, field, fieldControllers)
-                );
-            })
-        );
-
-        var retObj = {
-            render: function (viewTarget) {
-                var rendered = Mustache.render(
-                    template,
-                    {
-                        'fields': model,
-                    },
-                    createPartials([
-                        'delete_button',
-                    ])
-                );
-                view = $(viewTarget);
-                view.html(rendered);
-
-                view.find('.delete-button').on('click', this.onDelete);
-
-                var field_destinations = view.find('.field-content');
-
-                fieldControllers.forEach(function (controller, i) {
-                    controller.render(field_destinations[i]);
-                });
-            },
-
-            onSave: function () {
-                forEachOnSave(fieldControllers);
-            },
-
-            onDelete: function () {
-                forEachOnDelete(fieldControllers);
-
-                view.remove();
-                innerOnDelete(retObj);
-                signalSave();
-            },
-
-            validateInput: function () {
-                console.log('contoller subsection validateInput stub');
-                return true;
-            },
-
-            toJSON: function () {
-                return fieldControllers.map(function (controller) {
-                    return controller.toJSON();
-                })
-            }
-        };
-        return retObj;
-    }
-};
-
 // Controller strategy for section
 var section_strategy = {
 
@@ -96,11 +25,12 @@ var section_strategy = {
         );
 
         var retObj = {
-            render: function (viewTarget) {
+            render: function reRender (viewTarget) {
                 var rendered = Mustache.render(
                     template,
                     {
-                        'subsections': model
+                        'name': model.name,
+                        'subsections': model.subsections,
                     },
                     createPartials([
                         'delete_button'
@@ -114,6 +44,21 @@ var section_strategy = {
                 // the only existing .delete-button.
                 view.find('.delete-button').on('click', this.onDelete);
 
+                var addSection = function () {
+                    var newSubsection = [];
+                    console.log(model.subsections);
+                    model.subsections.push(newSubsection);
+                    subsectionControllers.push(
+                        subsection_strategy.createController(
+                            newSubsection,
+                            createInnerOnDelete(model.subsections, newSubsection, subsectionControllers)
+                        )
+                    );
+                    reRender(viewTarget);
+                    signalSave();
+                };
+                view.find('.add-subsection-button').on('click', addSection);
+
                 var subsection_destinations = view.find('.subsection-content');
                 subsectionControllers.forEach(function (controller, i) {
                     controller.render(subsection_destinations[i]);
@@ -121,6 +66,7 @@ var section_strategy = {
             },
 
             onSave: function () {
+                model.name = view.find('.section-name').val();
                 forEachOnSave(subsectionControllers);
             },
 

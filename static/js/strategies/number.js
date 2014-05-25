@@ -14,6 +14,15 @@ var number_strategy = {
         var template = $('#number-input-template').html();
         Mustache.parse(template);
 
+        applyUnsetDefaults(model, {
+            'showCaption': USE_COMMON_DEFAULT,
+            'required': USE_COMMON_DEFAULT,
+            'size': USE_COMMON_DEFAULT,
+            'default': USE_COMMON_DEFAULT,
+            'min': USE_COMMON_DEFAULT,
+            'max': USE_COMMON_DEFAULT,
+        });
+
         var retObj = {
             render: function (viewTarget) {
                 var rendered = Mustache.render(template,
@@ -77,16 +86,19 @@ var number_strategy = {
             },
 
             toJSON: function () {
-                return {
+                var json = {
                     'type': model.type,
                     'name': model.name,
                     'showCaption': model.showCaption,
                     'required': model.required,
-                    'min': model.min,
-                    'max': model.max,
                     'size': model.size,
-                    'default': model._default,
                 };
+                addIfMeaningful(model, json, [
+                    'min',
+                    'max',
+                    'default',
+                ]);
+                return json;
             }
         };
         return retObj;

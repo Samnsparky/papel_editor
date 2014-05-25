@@ -1,7 +1,7 @@
 <script id="subsection-template" type="x-tmpl-mustache">
 <div class="row">
     <div class="col-xs-1">
-        <span>Subsection</span>
+        <span>{{ subsection_text }}</span>
         {{> delete_button_partial }}
     </div>
     <div class="col-xs-10">
@@ -10,4 +10,15 @@
         {{/fields}}
     </div>
 </div>
+<div class="row">
+    <div class="col-xs-1"></div>
+    </div class="cos-xs-10">
+        <div class="form-inline">
+            {{> new_type_partial }}
+            <input type="text" class="new-name-input form-control" placeholder="New field name">
+            <button type="button" class="add-field-button form-control btn btn-default">Add field</button>
+        </div>
+    </div>
+</div>
+<p class="infostuff"></p>
 </script>

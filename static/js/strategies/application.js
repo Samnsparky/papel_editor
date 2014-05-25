@@ -1,74 +1,4 @@
 
-var application_structure = {
-    name: 'Application Name',
-    openDate: '2013-11-26',
-    openDateHuman: '',
-    closeDate: '',
-    closeDateHuman: '',
-    sections: [
-        {
-            "name": "General",
-            "subsections": [
-                [
-                    {
-                        "name": "First Name",
-                        "required": true,
-                        "type": "text",
-                        "size": "large",
-                        "showCaption": false,
-                        "default": "hello default"
-                    },
-                    {
-                        "name": "Middle Name",
-                        "required": true,
-                        "type": "text",
-                        "size": "large",
-                        "showCaption": false,
-                        "default": "hello default"
-                    },
-                    {
-                        "name": "Birthday",
-                        "required": false,
-                        "type": "date",
-                        "showCaption": true
-                    },
-                    {
-                        "name": "Home phone",
-                        "required": true,
-                        "type": "phoneNumber",
-                        "size": "medium",
-                        "showCaption": true
-                    },
-                    {
-                        "name": "SAT Mathematics Score",
-                        "showCaption": true,
-                        "type": "number",
-                        "required": true,
-                        "min": 200,
-                        "max": 800,
-                        "size": "medium",
-                        "default": "SAT DEFAULT HERE"
-                    },
-                    {
-                        "name": "Gender",
-                        "showCaption": true,
-                        "required": true,
-                        "type": "dropdown",
-                        "options": [
-                            "Female",
-                            "Male",
-                            "Intersex",
-                            "Other",
-                            "Choose not to disclose"
-                        ],
-                        "allowFreeText": true
-                    }
-                ]
-            ]
-        }
-    ]
-};
-
 var application_strategy = {
     matches: function (model) {
         return model.openDate !== undefined;
@@ -98,16 +28,39 @@ var application_strategy = {
                 Mustache.parse(template);
             },
 
-            render: function (viewTarget) {
+            render: function reRender (viewTarget) {
                 var rendered = Mustache.render(template, {
                     'name': model.name,
-                    'openDate': model.openDate,
+                    'openDate': sanitizeDate(model.openDate),
                     'openDateHuman': model.openDateHuman,
-                    'closeDate': model.closeDate,
-                    'closeDateHuman': model.closeDateHuman
+                    'closeDate': sanitizeDate(model.closeDate),
+                    'closeDateHuman': model.closeDateHuman,
+                    'sections': model.sections
                 });
                 view = $(viewTarget);
                 view.html(rendered);
+
+                var addSection = function () {
+                    var newSection = {
+                        name: view.find('.new-section-input').val(),
+                        subsections: []
+                    };
+                    model.sections.push(newSection);
+                    sectionControllers.push(
+                        createController(
+                            newSection,
+                            createInnerOnDelete(model.sections, newSection, sectionControllers)
+                        )
+                    );
+                    reRender(viewTarget);
+                    signalSave();
+                };
+                view.find('.add-section-button').on('click', addSection);
+                view.find('.new-section-input').on('keyup', function(e){
+                    if (e.which == 13) {
+                        addSection();
+                    }
+                });
 
                 // All subviews are listened to
                 view.change(signalSave);

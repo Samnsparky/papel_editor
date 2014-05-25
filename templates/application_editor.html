@@ -18,5 +18,11 @@
         <input id="close-date-human-input" type="text" class="form-control" value="{{ closeDateHuman }}">
     </div>
 </form>
-<div class="section-content">Sections loading...</div>
+{{#sections}}
+<div class="section-content">Section loading...</div>
+{{/sections}}
+<div class="form-inline">
+    <input type="text" class="new-section-input form-control" placeholder="New section name">
+    <button type="button" class="add-section-button form-control btn btn-default">Add section</button>
+</div>
 </script>

@@ -1,17 +1,27 @@
+<script id="new-type-partial" type="x-tmpl-mustache">
+<select class="new-type-input form-control">
+    <option>Text</option>
+    <option>Date</option>
+    <option>Phone Number</option>
+    <option>Number</option>
+    <option>Dropdown</option>
+    <option>Essay</option>
+    <option>Enumeration Table</option>
+    <option>Dropdown With Sub Fields</option>
+</select>
+</script>
 
 <script id="type-partial" type="x-tmpl-mustache">
-<label>Input type:
-    <select class="type-input form-control">
-        <option{{#type_text}} selected="selected"{{/type_text}}>Text</option>
-        <option{{#type_date}} selected="selected"{{/type_date}}>Date</option>
-        <option{{#type_phone_number}} selected="selected"{{/type_phone_number}}>Phone Number</option>
-        <option{{#type_number}} selected="selected"{{/type_number}}>Number</option>
-        <option{{#type_dropdown}} selected="selected"{{/type_dropdown}}>Dropdown</option>
-        <option{{#type_essay}} selected="selected"{{/type_essay}}>Essay</option>
-        <option{{#type_enumeration_table}} selected="selected"{{/type_enumeration_table}}>Enumeration Table</option>
-        <option{{#type_dropdown_with_sub_fields}} selected="selected"{{/type_dropdown_with_sub_fields}}>Dropdown With Sub Fields</option>
-    </select>
-</label>
+<select class="type-input form-control">
+    <option{{#type_text}} selected="selected"{{/type_text}}>Text</option>
+    <option{{#type_date}} selected="selected"{{/type_date}}>Date</option>
+    <option{{#type_phone_number}} selected="selected"{{/type_phone_number}}>Phone Number</option>
+    <option{{#type_number}} selected="selected"{{/type_number}}>Number</option>
+    <option{{#type_dropdown}} selected="selected"{{/type_dropdown}}>Dropdown</option>
+    <option{{#type_essay}} selected="selected"{{/type_essay}}>Essay</option>
+    <option{{#type_enumeration_table}} selected="selected"{{/type_enumeration_table}}>Enumeration Table</option>
+    <option{{#type_dropdown_with_subfields}} selected="selected"{{/type_dropdown_with_subfields}}>Dropdown With Sub Fields</option>
+</select>
 </script>
 
 <script id="required-partial" type="x-tmpl-mustache">
@@ -76,5 +86,34 @@
 <div class="form-group">
     <label for="min-input">Minimum</label>
     <input type="number" class="min-input form-control" value="{{ min }}">
+</div>
+</script>
+
+<script id="prompt-partial" type="x-tmpl-mustache">
+<div class="form-group">
+    <label for="prompt-input">Prompt</label>
+    <input type="text" class="prompt-input form-control" value="{{ prompt }}">
+</div>
+</script>
+
+<script id="character-limit-partial" type="x-tmpl-mustache">
+<div class="form-group">
+    <label for="character-limit-input">Character Limit</label>
+    <input type="number" class="character-limit-input form-control" value="{{ character_limit }}">
+</div>
+</script>
+
+<script id="item-type-partial" type="x-tmpl-mustache">
+<div class="form-group">
+    <label for="item-type-input">Item type</label>
+    <input type="text" class="item-type-input form-control" value="{{ item_type }}" placeholder="Singular item type">
+</div>
+</script>
+
+<script id="hidden-partial" type="x-tmpl-mustache">
+<div class="checkbox">
+    <label><input class="hidden-input" type="checkbox" value="{{ hidden }}"
+    {{#hidden}}checked{{/hidden}}
+    >Hidden</label>
 </div>
 </script>

@@ -5,14 +5,21 @@ var options_entry_controller = {
         var template = $('#dropdown-options-entry-template').html();
         Mustache.parse(template);
 
+        applyUnsetDefaults(model, {
+            'showCaption': USE_COMMON_DEFAULT,
+            'required': USE_COMMON_DEFAULT,
+            'options': USE_COMMON_DEFAULT,
+            'allowFreeText': USE_COMMON_DEFAULT,
+        });
+
         var retObj = {
-            render: function (viewEl) {
+            render: function (viewTarget) {
                 var rendered = Mustache.render(template, {
                         'options_entry': model
                     }
                 );
 
-                view = $(viewEl);
+                view = $(viewTarget);
                 view.html(rendered);
 
                 view.find('.remove-options-entry-button').on('click', this.onDelete);
@@ -41,8 +48,8 @@ var options_entry_controller = {
     }
 };
 
- // (Secret) controller strategy for dropdown options
- var options_strategy = {
+// (Secret) controller strategy for dropdown options
+var options_strategy = {
     createController: function (model) {
         var view = null;
         var optionsEntryControllers = [];
@@ -67,27 +74,25 @@ var options_entry_controller = {
         );
 
         var retObj = {
-            render: function reRender (viewEl) {
+            render: function reRender (viewTarget) {
                 var rendered = Mustache.render(template, {
                     'options': model
                 });
-                view = $(viewEl);
+                view = $(viewTarget);
                 view.html(rendered);
 
                 var addEntry = function() {
                     var entry = view.find('.new-options-entry-input').val();
                     model.push(entry);
                     optionsEntryControllers.push(createEntryController(model, entry));
-                    reRender(viewEl);
+                    reRender(viewTarget);
                     signalSave();
                 };
 
                 view.find('.add-options-entry-button').on('click', addEntry);
-                view.find('.new-options-entry-input').keypress(function(e) {
+                view.find('.new-options-entry-input').on('keyup', function(e){
                     if (e.which == 13) {
                         addEntry();
-                        // e.preventDefault();
-                        // return false;
                     }
                 });
 

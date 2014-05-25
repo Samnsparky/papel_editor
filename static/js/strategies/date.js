@@ -14,6 +14,11 @@ var date_strategy = {
         var template = $('#date-input-template').html();
         Mustache.parse(template);
 
+        applyUnsetDefaults(model, {
+            'showCaption': USE_COMMON_DEFAULT,
+            'required': USE_COMMON_DEFAULT,
+        });
+
         var retObj = {
             render: function (viewTarget) {
                 var rendered = Mustache.render(
@@ -22,7 +27,7 @@ var date_strategy = {
                         'type': model.type,
                         'type_date': true,
                         'name': model.name,
-                        'showCaption': model.showCaption,
+                        'show_caption': model.showCaption,
                         'required': model.required,
                     },
                     createPartials([

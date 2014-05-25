@@ -14,6 +14,13 @@ var text_strategy = {
         var template = $('#text-input-template').html();
         Mustache.parse(template);
 
+        applyUnsetDefaults(model, {
+            'showCaption': USE_COMMON_DEFAULT,
+            'required': USE_COMMON_DEFAULT,
+            'size': USE_COMMON_DEFAULT,
+            'default': USE_COMMON_DEFAULT,
+        });
+
         var retObj = {
             render: function (viewTarget) {
                 var rendered = Mustache.render(template,
@@ -25,7 +32,7 @@ var text_strategy = {
                         'required': model.required,
                         'size': model.size,
                         'size_selects' : createSizeSelects(model.size),
-                        'default': model.default,
+                        'default': model['default'],
                     },
                     createPartials([
                         'delete_button',
@@ -55,8 +62,8 @@ var text_strategy = {
                 model.name = view.find('.name-input').val();
                 model.showCaption = view.find('.show-caption-input').is(':checked');
                 model.required = view.find('.required-input').is(':checked');
-                model.size = view.find('.size-input').val();
-                model._default = view.find('.default-input').val();
+                model.size = resolveFromHumanSize(view.find('.size-input').val());
+                model['default'] = view.find('.default-input').val();
             },
 
             onDelete: function (event) {
@@ -71,14 +78,17 @@ var text_strategy = {
             },
 
             toJSON: function () {
-                return {
+                var json = {
                     'type': model.type,
                     'name': model.name,
                     'showCaption': model.showCaption,
                     'required': model.required,
                     'size': model.size,
-                    'default': model._default,
                 };
+                addIfMeaningful(model, json, [
+                    'default',
+                ]);
+                return json;
             }
         };
         return retObj;

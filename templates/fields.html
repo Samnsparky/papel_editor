@@ -81,14 +81,12 @@
         {{> delete_button_partial }}
     </div>
     <div class="col-xs-7">
-        <form>
             {{> type_partial }}
             {{> name_partial }}
             {{> show_caption_partial }}
             {{> required_partial }}
             <div class="dropdown-options-content"></div>
             {{> allow_free_text }}
-        </form>
     </div>
 </div>
 </script>
@@ -118,4 +116,81 @@
         </button>
     </td>
 </tr>
+</script>
+
+<script id="dropdown-with-subfields-input-template" type="x-tmpl-mustache">
+<div class="row">
+    <div class="col-xs-1">
+        <span>Dropdown With SubFields Input</span>
+        {{> delete_button_partial }}
+    </div>
+    <div class="col-xs-7">
+        {{> type_partial }}
+        {{> name_partial }}
+        {{> required_partial }}
+        <div class="dropdown-with-subfields-options-content"></div>
+    </div>
+</div>
+</script>
+
+<script id="dropdown-with-subfields-options-template" type="x-tmpl-mustache">
+{{#options}}
+<div class="dropdown-with-subfields-options-entry-content"></div>
+{{/options}}
+<div class="form-inline">
+    <input type="text" class="new-with-subfields-options-entry-input" placeholder="Option Name">
+    <button type="button" class="add-with-subfields-options-entry-button form-control btn btn-default">Add option</button>
+</div>
+</script>
+
+<script id="dropdown-with-subfields-options-entry-template" type="x-tmpl-mustache">
+<div class="row">
+    <div class="col-xs-1">
+        <span>Option</span>
+        {{> delete_button_partial }}
+    </div>
+    <div class="col-xs-7">
+        <label for="with-subfields-options-input">Option</label>
+        <input type="text" class="with-subfields-options-input form-control" value="{{ option }}">
+        <hr>
+        <div class="subsection-content"></div>
+    </div>
+</div>
+</script>
+
+<script id="essay-input-template" type="x-tmpl-mustache">
+<div class="row">
+    <div class="col-xs-1">
+        <span>Essay Input</span>
+        {{> delete_button_partial }}
+    </div>
+    <div class="col-xs-7">
+        <form>
+            {{> type_partial }}
+            {{> name_partial }}
+            {{> show_caption_partial }}
+            {{> prompt_partial }}
+            {{> character_limit_partial }}
+        </form>
+    </div>
+</div>
+</script>
+
+<script id="enumeration-table-input-template" type="x-tmpl-mustache">
+<div class="row">
+    <div class="col-xs-1">
+        <span>Enumeration Table Input</span>
+        {{> delete_button_partial }}
+    </div>
+    <div class="col-xs-10">
+        <form>
+            {{> type_partial }}
+            {{> name_partial }}
+            {{> required_partial }}
+            {{> item_type_partial }}
+            {{> hidden_partial }}
+            <div class="subsection-content">TODO fields_partial</div>
+        </form>
+    </div>
+</div>
 </script>

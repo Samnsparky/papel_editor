@@ -14,6 +14,12 @@ var phone_strategy = {
         var template = $('#phone-number-input-template').html();
         Mustache.parse(template);
 
+        applyUnsetDefaults(model, {
+            'showCaption': USE_COMMON_DEFAULT,
+            'required': USE_COMMON_DEFAULT,
+            'size': USE_COMMON_DEFAULT,
+        });
+
         var retObj = {
             render: function (viewTarget) {
                 var rendered = Mustache.render(
