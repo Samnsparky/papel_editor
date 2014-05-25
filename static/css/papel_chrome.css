@@ -6,6 +6,10 @@
     margin-bottom: 70px;
 }
 
+.section-name-content {
+    margin-bottom: 4px;
+}
+
 .section-header {
     margin-bottom: 10px;
 }
@@ -22,4 +26,9 @@
 .remove-span-custom {
     padding: 0;
     border: none;
+}
+
+.remove-options-entry-button {
+    border-top-right-radius: 4px !important;
+    border-bottom-right-radius: 4px !important;
 }

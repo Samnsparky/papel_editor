@@ -1,11 +1,15 @@
 
 <script id="text-input-template" type="x-tmpl-mustache">
 <div class="row">
-    <div class="col-xs-2">
+    <div class="col-xs-2 col-sm-2">
         <span>Text Input</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2 col-sm-2">
         {{> delete_button_partial }}
     </div>
-    <div class="col-xs-10">
+    <div class="col-xs-10 col-sm-10">
         <form>
             {{> name_partial }}
             {{> show_caption_partial }}
@@ -19,11 +23,15 @@
 
 <script id="date-input-template" type="x-tmpl-mustache">
 <div class="row">
-    <div class="col-xs-2">
+    <div class="col-xs-2 col-sm-2">
         <span>Date Input</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2 col-sm-2">
         {{> delete_button_partial }}
     </div>
-    <div class="col-xs-2">
+    <div class="col-xs-10 col-sm-10">
         <form>
             {{> name_partial }}
             {{> show_caption_partial }}
@@ -35,11 +43,15 @@
 
 <script id="phone-number-input-template" type="x-tmpl-mustache">
 <div class="row">
-    <div class="col-xs-2">
+    <div class="col-xs-2 col-sm-2">
         <span>Phone Number Input</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2 col-sm-2">
         {{> delete_button_partial }}
     </div>
-    <div class="col-xs-10">
+    <div class="col-xs-10 col-sm-10">
         <form>
             {{> name_partial }}
             {{> show_caption_partial }}
@@ -52,11 +64,15 @@
 
 <script id="number-input-template" type="x-tmpl-mustache">
 <div class="row">
-    <div class="col-xs-2">
+    <div class="col-xs-2 col-sm-2">
         <span>Number Input</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2 col-sm-2">
         {{> delete_button_partial }}
     </div>
-    <div class="col-xs-10">
+    <div class="col-xs-12 col-sm-10">
         <form>
             {{> name_partial }}
             {{> show_caption_partial }}
@@ -74,10 +90,12 @@
 <div class="row">
     <div class="col-xs-2">
         <span>Dropdown Input</span>
-        {{> delete_button_partial }}
     </div>
 </div>
 <div class="row">
+    <div class="col-xs-2 col-sm-2">
+        {{> delete_button_partial }}
+    </div>
     <div class="col-xs-2"></div>
     <div class="col-xs-10">
             {{> name_partial }}
@@ -122,10 +140,12 @@
 <div class="row">
     <div class="col-xs-2">
         <span>Dropdown With SubFields Input</span>
-        {{> delete_button_partial }}
     </div>
 </div>
 <div class="row">
+    <div class="col-xs-2">
+        {{> delete_button_partial }}
+    </div>
     <div class="col-xs-2"></div>
     <div class="col-xs-10">
         {{> name_partial }}
@@ -140,7 +160,7 @@
 <div class="dropdown-with-subfields-options-entry-content"></div>
 {{/options}}
 <div class="form-inline">
-    <input type="text" class="new-with-subfields-options-entry-input" placeholder="Option Name">
+    <input type="text" class="new-with-subfields-options-entry-input form-control" placeholder="Option Name">
     <button type="button" class="add-with-subfields-options-entry-button form-control btn btn-default">Add option</button>
 </div>
 </script>
@@ -149,10 +169,12 @@
 <div class="row">
     <div class="col-xs-2">
         <span>Option</span>
-        {{> delete_button_partial }}
     </div>
 </div>
 <div class="row">
+    <div class="col-xs-2">
+        {{> delete_button_partial }}
+    </div>
     <div class="col-xs-2"></div>
     <div class="col-xs-10">
         <label for="with-subfields-options-input">Option</label>
@@ -167,6 +189,10 @@
 <div class="row">
     <div class="col-xs-2">
         <span>Essay Input</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
         {{> delete_button_partial }}
     </div>
     <div class="col-xs-10">
@@ -190,9 +216,6 @@
     <div class="col-xs-2">
         {{> delete_button_partial }}
     </div>
-</div>
-<div class="row">
-    <div class="col-xs-2"></div>
     <div class="col-xs-10">
         {{> name_partial }}
         {{> required_partial }}
