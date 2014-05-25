@@ -1,9 +1,20 @@
 <script id="subsection-template" type="x-tmpl-mustache">
-<div class="row">
-    <div class="col-xs-1">
-        <span>{{ subsection_text }}</span>
-        {{> delete_button_partial }}
+<div class="row subsection-header">
+    <div class="col-xs-11">
+        <div class="row">
+            <div class="col-xs-12">
+                <span>{{ subsection_text }}</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                {{> delete_button_partial }}
+            </div>
+        </div>
     </div>
+</div>
+<div class="row">
+    <div class="col-xs-1"></div>
     <div class="col-xs-10">
         {{#fields}}
         <div class="field-content"></div>

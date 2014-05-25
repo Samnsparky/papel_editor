@@ -1,3 +1,25 @@
 #application-structure {
     display:none;
 }
+
+.section-content {
+    margin-bottom: 70px;
+}
+
+.section-header {
+    margin-bottom: 10px;
+}
+
+.subsection-content {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 20px;
+}
+
+.field-content {
+    margin: 20px 0;
+}
+
+.remove-span-custom {
+    padding: 0;
+    border: none;
+}

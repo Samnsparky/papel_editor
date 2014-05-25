@@ -1,16 +1,24 @@
 <script id="section-template" type="x-tmpl-mustache">
-<div class="row">
-    <div class="col-xs-1">
+<div class="row section-header">
+    <div class="col-xs-12">
         <div class="row">
-            <span>Section</span>
+            <div class="col-xs-12">
+                <h3>Section</h3>
+            </div>
         </div>
         <div class="row">
-            <input type="text" class="section-name" value="{{ name }}">
+            <div class="col-xs-12">
+                <input type="text" class="section-name" value="{{ name }}">
+            </div>
         </div>
         <div class="row">
-            {{> delete_button_partial }}
+            <div class="col-xs-12">
+                {{> delete_button_partial }}
+            </div>
         </div>
     </div>
+</div
+<div class="row">
     <div class="col-xs-11">
         {{#subsections}}
         <div class="subsection-content"></div>
@@ -18,9 +26,8 @@
     </div>
 </div>
 <div class="row">
-    <div class="col-xs-1">
-    </div>
-    <div class="col-xs-2">
+    <div class="col-xs-1"></div>
+    <div class="col-xs-11">
         <button type="button" class="add-subsection-button form-control btn btn-default">
             Add subsection
         </button>
