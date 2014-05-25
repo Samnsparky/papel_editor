@@ -1,13 +1,16 @@
 
 <script id="text-input-template" type="x-tmpl-mustache">
 <div class="row">
-    <div class="col-xs-1">
+    <div class="col-xs-2 col-sm-2">
         <span>Text Input</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2 col-sm-2">
         {{> delete_button_partial }}
     </div>
-    <div class="col-xs-7">
+    <div class="col-xs-10 col-sm-10">
         <form>
-            {{> type_partial }}
             {{> name_partial }}
             {{> show_caption_partial }}
             {{> required_partial }}
@@ -20,13 +23,16 @@
 
 <script id="date-input-template" type="x-tmpl-mustache">
 <div class="row">
-    <div class="col-xs-1">
+    <div class="col-xs-2 col-sm-2">
         <span>Date Input</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2 col-sm-2">
         {{> delete_button_partial }}
     </div>
-    <div class="col-xs-7">
+    <div class="col-xs-10 col-sm-10">
         <form>
-            {{> type_partial }}
             {{> name_partial }}
             {{> show_caption_partial }}
             {{> required_partial }}
@@ -37,13 +43,16 @@
 
 <script id="phone-number-input-template" type="x-tmpl-mustache">
 <div class="row">
-    <div class="col-xs-1">
+    <div class="col-xs-2 col-sm-2">
         <span>Phone Number Input</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2 col-sm-2">
         {{> delete_button_partial }}
     </div>
-    <div class="col-xs-7">
+    <div class="col-xs-10 col-sm-10">
         <form>
-            {{> type_partial }}
             {{> name_partial }}
             {{> show_caption_partial }}
             {{> required_partial }}
@@ -55,13 +64,16 @@
 
 <script id="number-input-template" type="x-tmpl-mustache">
 <div class="row">
-    <div class="col-xs-1">
+    <div class="col-xs-2 col-sm-2">
         <span>Number Input</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2 col-sm-2">
         {{> delete_button_partial }}
     </div>
-    <div class="col-xs-7">
+    <div class="col-xs-12 col-sm-10">
         <form>
-            {{> type_partial }}
             {{> name_partial }}
             {{> show_caption_partial }}
             {{> required_partial }}
@@ -76,12 +88,16 @@
 
 <script id="dropdown-input-template" type="x-tmpl-mustache">
 <div class="row">
-    <div class="col-xs-1">
+    <div class="col-xs-2">
         <span>Dropdown Input</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2 col-sm-2">
         {{> delete_button_partial }}
     </div>
-    <div class="col-xs-7">
-            {{> type_partial }}
+    <div class="col-xs-2"></div>
+    <div class="col-xs-10">
             {{> name_partial }}
             {{> show_caption_partial }}
             {{> required_partial }}
@@ -92,13 +108,13 @@
 </script>
 
 <script id="dropdown-options-template" type="x-tmpl-mustache">
-<table class="table">
-    <tbody>
+<div class="row">
+    <div class="col-xs-12">
         {{#options}}
         <div class="dropdown-options-entry-content"></div>
         {{/options}}
-    </tbody>
-</table>
+    </div>
+</div>
 <div class="form-inline">
     <input type="text" class="new-options-entry-input form-control" placeholder="Add new option">
     <button type="button" class="add-options-entry-button form-control btn btn-default">Add option</button>
@@ -106,26 +122,32 @@
 </script>
 
 <script id="dropdown-options-entry-template" type="x-tmpl-mustache">
-<tr>
-    <td>
-        <input type="text" class="options-entry-input form-control" value="{{ options_entry }}">
-    </td>
-    <td>
-        <button type="button" class="remove-options-entry-button form-control btn btn-danger">
-            <span class="glyphicon glyphicon-remove"></span>
-        </button>
-    </td>
-</tr>
+<div class="row">
+    <div class="form-group col-xs-10">
+        <div class="input-group">
+            <input type="text" class="options-entry-input form-control" value="{{ options_entry }}">
+            <span class="input-group-addon remove-span-custom">
+                <button type="button" class="remove-options-entry-button form-control btn btn-danger">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
+            </span>
+        </div>
+    </div>
+</div>
 </script>
 
 <script id="dropdown-with-subfields-input-template" type="x-tmpl-mustache">
 <div class="row">
-    <div class="col-xs-1">
+    <div class="col-xs-2">
         <span>Dropdown With SubFields Input</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
         {{> delete_button_partial }}
     </div>
-    <div class="col-xs-7">
-        {{> type_partial }}
+    <div class="col-xs-2"></div>
+    <div class="col-xs-10">
         {{> name_partial }}
         {{> required_partial }}
         <div class="dropdown-with-subfields-options-content"></div>
@@ -138,18 +160,23 @@
 <div class="dropdown-with-subfields-options-entry-content"></div>
 {{/options}}
 <div class="form-inline">
-    <input type="text" class="new-with-subfields-options-entry-input" placeholder="Option Name">
+    <input type="text" class="new-with-subfields-options-entry-input form-control" placeholder="Option Name">
     <button type="button" class="add-with-subfields-options-entry-button form-control btn btn-default">Add option</button>
 </div>
 </script>
 
 <script id="dropdown-with-subfields-options-entry-template" type="x-tmpl-mustache">
 <div class="row">
-    <div class="col-xs-1">
+    <div class="col-xs-2">
         <span>Option</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
         {{> delete_button_partial }}
     </div>
-    <div class="col-xs-7">
+    <div class="col-xs-2"></div>
+    <div class="col-xs-10">
         <label for="with-subfields-options-input">Option</label>
         <input type="text" class="with-subfields-options-input form-control" value="{{ option }}">
         <hr>
@@ -160,13 +187,16 @@
 
 <script id="essay-input-template" type="x-tmpl-mustache">
 <div class="row">
-    <div class="col-xs-1">
+    <div class="col-xs-2">
         <span>Essay Input</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
         {{> delete_button_partial }}
     </div>
-    <div class="col-xs-7">
+    <div class="col-xs-10">
         <form>
-            {{> type_partial }}
             {{> name_partial }}
             {{> show_caption_partial }}
             {{> prompt_partial }}
@@ -178,19 +208,20 @@
 
 <script id="enumeration-table-input-template" type="x-tmpl-mustache">
 <div class="row">
-    <div class="col-xs-1">
+    <div class="col-xs-2">
         <span>Enumeration Table Input</span>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-2">
         {{> delete_button_partial }}
     </div>
     <div class="col-xs-10">
-        <form>
-            {{> type_partial }}
-            {{> name_partial }}
-            {{> required_partial }}
-            {{> item_type_partial }}
-            {{> hidden_partial }}
-            <div class="subsection-content">TODO fields_partial</div>
-        </form>
+        {{> name_partial }}
+        {{> required_partial }}
+        {{> item_type_partial }}
+        {{> hidden_partial }}
+        <div class="subsection-content"></div>
     </div>
 </div>
 </script>
