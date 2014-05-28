@@ -7,7 +7,7 @@
         <link rel="stylesheet" type="text/css" href="{{ base_url }}/static/css/base.css">
         {% block styles %}{% endblock %}
     </head>
-    <body>
+    <body data-spy="scroll" data-target="#tree-view-sidebar">
         <div id="content-area" class="container-fluid">
             <div id="confirmation-message-display"></div>
             <div id="header-bar">
@@ -23,6 +23,7 @@
         <script src="{{ base_url }}/static/js/lib/dict.js"></script>
         <script src="{{ base_url }}/static/js/lib/mustache.js"></script>
         <script src="{{ base_url }}/static/js/lib/bootstrap.min.js"></script>
+        <script src="{{ base_url }}/static/js/lib/jquery.scrollTo.js"></script>
         {% block scripts %}{% endblock %}
 
     </body>

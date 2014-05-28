@@ -8,6 +8,7 @@ var application_strategy = {
         var view = null;
         var template = null;
         var sectionControllers = [];
+        var treeViewController = tree_view_controller.createController(model);
 
         // Add the results of the map operation to the end of controllers array,
         // rather than creating a new array. (Not adding the results would make
@@ -15,9 +16,10 @@ var application_strategy = {
         Array.prototype.push.apply(
             sectionControllers,
             model.sections.map(function(section) {
-                return createController(
+                return section_strategy.createController(
                     section,
-                    createInnerOnDelete(model, section, sectionControllers)
+                    createInnerOnDelete(model.sections, section, sectionControllers),
+                    model
                 );
             })
         );
@@ -43,13 +45,14 @@ var application_strategy = {
                 var addSection = function () {
                     var newSection = {
                         name: view.find('.new-section-input').val(),
-                        subsections: []
+                        subsections: [],
                     };
                     model.sections.push(newSection);
                     sectionControllers.push(
-                        createController(
+                        section_strategy.createController(
                             newSection,
-                            createInnerOnDelete(model.sections, newSection, sectionControllers)
+                            createInnerOnDelete(model.sections, newSection, sectionControllers),
+                            model
                         )
                     );
                     reRender(viewTarget);
@@ -65,6 +68,8 @@ var application_strategy = {
                 // All subviews are listened to
                 view.change(signalSave);
 
+                treeViewController.render(view.find('#tree-view-sidebar-content'));
+
                 var section_destinations = view.find('.section-content');
                 sectionControllers.forEach(function (controller, i) {
                     controller.render(section_destinations[i]);
@@ -77,7 +82,7 @@ var application_strategy = {
                 model.closeDate = view.find('#close-date-input').val();
                 model.closeDateHuman = view.find('#close-date-human-input').val();
 
-                forEachOnSave(sectionControllers);
+                forEachOnSave(sectionControllers, model.sections);
             },
 
             onDelete: function () {
@@ -85,7 +90,6 @@ var application_strategy = {
             },
 
             validateInput: function () {
-                console.log('application controller validateInput stub');
                 return true;
             },
 
