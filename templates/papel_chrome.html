@@ -19,6 +19,7 @@
 <script type="text/javascript" language="javascript" src="/static/js/strategies/dropdown_with_subfields.js"></script>
 
 <script type="text/javascript" language="javascript" src="/static/js/tree_view_sidebar.js"></script>
+<script type="text/javascript" language="javascript" src="/static/js/util.js"></script>
 <script type="text/javascript" language="javascript" src="/static/js/papel_editor.js"></script>
 
 {{ application_editor|safe }}
@@ -31,16 +32,15 @@
 {% endblock %}
 
 {% block content %}
-<div id="application-structure"></div>
+<div id="application-structure">{{ startup_json|safe }}</div>
 <input type="text" id="server-url" value="{{ server_url }}">
 <input type="text" id="debug" value="{{ debug }}">
 
 <div class="row">
     <div class="col-xs-12" id="application-editor">Loading application editor...</div>
 </div>
-<hr/>
 <div class="row">
-    <div class="col-xs-12" id="raw-json-view">
+    <div class="col-xs-9" id="raw-json-view">
     </div>
 </div>
 

@@ -5,6 +5,12 @@
 """
 import flask
 import jinja2
+import codecs
+
+# For test_structure.json
+import sys
+reload(sys)
+sys.setdefaultencoding("utf-8")
 
 # Create application
 app = flask.Flask(__name__)
@@ -15,16 +21,18 @@ BASE_URL='http://127.0.0.1:5000'
 def render():
     name = 'Papel Editor'
 
-    def getSubHTML(file_name):
+    def getFileContents(file_name):
         with open(file_name, 'r') as f:
             return f.read()
 
-    application_editor = getSubHTML('templates/application_editor.html')
-    section = getSubHTML('templates/section.html')
-    subsection = getSubHTML('templates/subsection.html')
-    fields = getSubHTML('templates/fields.html')
-    components = getSubHTML('templates/components.html')
-    tree_view_sidebar = getSubHTML('templates/tree_view_sidebar.html')
+    application_editor = getFileContents('templates/application_editor.html')
+    section = getFileContents('templates/section.html')
+    subsection = getFileContents('templates/subsection.html')
+    fields = getFileContents('templates/fields.html')
+    components = getFileContents('templates/components.html')
+    tree_view_sidebar = getFileContents('templates/tree_view_sidebar.html')
+    # startup_json = getFileContents('test_structure.json')
+    startup_json = getFileContents('2014-2015_School_Year.json')
     server_url = 'http://127.0.0.1:5000'
     debug = 'true'
 
@@ -39,6 +47,7 @@ def render():
         fields=fields,
         components=components,
         tree_view_sidebar=tree_view_sidebar,
+        startup_json=startup_json,
         server_url=server_url,
         debug=debug
     )

@@ -8,8 +8,8 @@ var with_subfields_options_entry_strategy = {
         Mustache.parse(template);
 
         applyUnsetDefaults(model, {
-            'required': USE_COMMON_DEFAULT,
-            'options': USE_COMMON_DEFAULT,
+            'option': USE_COMMON_DEFAULT,
+            'subFields': USE_COMMON_DEFAULT,
         });
 
         var subsection_controller = subsection_strategy.createController(
@@ -36,7 +36,7 @@ var with_subfields_options_entry_strategy = {
                 view = $(viewTarget);
                 view.html(rendered);
 
-                transactionalListen(view, '.deleteButton', 'click', this.onDelete);
+                transactionalListen(view, '.delete-button', 'click', this.onDelete);
 
                 var subfields_destination = view.find('.subsection-content');
                 subsection_controller.render(subfields_destination);
@@ -116,6 +116,7 @@ var options_with_subfields_strategy = {
                 };
 
                 transactionalListen(view, '.add-with-subfields-options-entry-button', 'click', addEntry);
+                preventDefault(view, '.new-with-subfields-options-entry-input', 'keydown', 13);
                 transactionalListen(view, '.new-with-subfields-options-entry-input', 'keyup', function(e) {
                     if (e.which == 13) {
                         addEntry();
@@ -170,6 +171,11 @@ var dropdown_with_subfields_strategy = {
         var view = null;
         var template = $('#dropdown-with-subfields-input-template').html();
         Mustache.parse(template);
+
+        applyUnsetDefaults(model, {
+            'options': USE_COMMON_DEFAULT,
+            'required': USE_COMMON_DEFAULT,
+        })
 
         var options_controller = options_with_subfields_strategy.createController(model.options);
 

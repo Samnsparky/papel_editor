@@ -58,6 +58,7 @@
                 };
 
                 transactionalListen(view, '.add-field-button', 'click', addField);
+                preventDefault(view, '.new-name-input', 'keydown', 13);
                 transactionalListen(view, '.new-name-input', 'keyup', function(e){
                     if (e.which == 13) {
                         addField();

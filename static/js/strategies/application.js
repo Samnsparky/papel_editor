@@ -1,13 +1,25 @@
+var EXISTING_ELEMENTS_QUERY = ':not(.new-node-form)>';
+var EXISTING_ELEMENTS_INPUT_QUERY = EXISTING_ELEMENTS_QUERY + 'input';
+var EXISTING_ELEMENTS_SELECT_QUERY = EXISTING_ELEMENTS_QUERY + 'select';
+var EXISTING_ELEMENT_CTRLS_QUERY = [
+    EXISTING_ELEMENTS_INPUT_QUERY,
+    EXISTING_ELEMENTS_SELECT_QUERY
+].join(',');
 
 var application_strategy = {
-    matches: function (model) {
-        return model.openDate !== undefined;
-    },
-
     createController: function (model) {
         var view = null;
         var template = null;
         var sectionControllers = [];
+
+        applyUnsetDefaults(model, {
+            'openDate': '',
+            'openDateHuman': '',
+            'closeDate': '',
+            'closeDateHuman': '',
+            'sections': [],
+        });
+
         var treeViewController = tree_view_controller.createController(model);
 
         // Add the results of the map operation to the end of controllers array,
@@ -39,7 +51,7 @@ var application_strategy = {
                     'closeDateHuman': model.closeDateHuman,
                     'sections': model.sections
                 });
-                view = $(viewTarget);
+                view = $('<div>');
                 view.off('change');
                 view.html(rendered);
 
@@ -60,8 +72,9 @@ var application_strategy = {
                     signalSave();
                 };
                 transactionalListen(view, '.add-section-button', 'click', addSection);
+                preventDefault(view, '.new-section-input', 'keydown', 13);
                 transactionalListen(view, '.new-section-input', 'keyup', function(e){
-                    if (e.which == 13) {
+                    if (e.which === 13) {
                         addSection();
                     }
                 });
@@ -73,10 +86,13 @@ var application_strategy = {
                     controller.render(section_destinations[i]);
                 });
 
-                treeViewController.refreshScrollSpy();
+                // Listen to everything not in the .new-type-form
+                view.find(EXISTING_ELEMENT_CTRLS_QUERY).on(
+                    'change', makeTransaction(signalSave));
 
-                // All subviews are listened to
-                view.on('change', makeTransaction(signalSave));
+                $(viewTarget).html(view);
+
+                treeViewController.refreshScrollSpy();
             },
 
             onSave: function () {

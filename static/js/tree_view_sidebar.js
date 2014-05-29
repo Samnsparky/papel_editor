@@ -48,8 +48,6 @@ var tree_view_controller = {
                 view = $(viewTarget);
                 view.html(rendered);
 
-                view.affix();
-
                 for (key in scrollTree) {
                     registerScrollTo(key, scrollTree[key]);
                 }
@@ -77,6 +75,8 @@ var tree_view_controller = {
                 $('[data-spy="scroll"]').each(function () {
                     var $spy = $(this).scrollspy('refresh');
                 });
+
+                view.affix();
             },
         };
 

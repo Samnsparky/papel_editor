@@ -5,13 +5,6 @@ var options_entry_controller = {
         var template = $('#dropdown-options-entry-template').html();
         Mustache.parse(template);
 
-        applyUnsetDefaults(model, {
-            'showCaption': USE_COMMON_DEFAULT,
-            'required': USE_COMMON_DEFAULT,
-            'options': USE_COMMON_DEFAULT,
-            'allowFreeText': USE_COMMON_DEFAULT,
-        });
-
         var retObj = {
             render: function (viewTarget) {
                 var rendered = Mustache.render(template, {
@@ -89,8 +82,9 @@ var options_strategy = {
                     signalSave();
                 };
 
-                transactionalListen(view, '.add-options-entry-button', '.add-options-entry-button', addEntry);
-                transactionalListen(view, '.new-options-entry-input', '.new-options-entry-input', function(e){
+                transactionalListen(view, '.add-options-entry-button', 'click', addEntry);
+                preventDefault(view, '.new-options-entry-input', 'keydown', 13);
+                transactionalListen(view, '.new-options-entry-input', 'keyup', function(e){
                     if (e.which == 13) {
                         addEntry();
                     }
@@ -143,6 +137,13 @@ var dropdown_strategy = {
         var view = null;
         var template = $('#dropdown-input-template').html();
         Mustache.parse(template);
+
+        applyUnsetDefaults(model, {
+            'options': USE_COMMON_DEFAULT,
+            'showCaption': USE_COMMON_DEFAULT,
+            'required': USE_COMMON_DEFAULT,
+            'allowFreeText': USE_COMMON_DEFAULT,
+        })
 
         var options_controller = options_strategy.createController(model.options);
 

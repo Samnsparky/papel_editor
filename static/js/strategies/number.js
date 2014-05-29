@@ -71,7 +71,7 @@ var number_strategy = {
                 model.min = view.find('.min-input').val();
                 model.max = view.find('.max-input').val();
                 model.size = view.find('.size-input').val();
-                model._default = view.find('.default-input').val();
+                model.default = view.find('.default-input').val();
             },
 
             onDelete: function () {
