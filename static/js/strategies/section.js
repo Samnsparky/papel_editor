@@ -44,7 +44,7 @@ var section_strategy = {
                 // Note that the rest of the DOM, with subsequent .delete-buttons,
                 // has not been rendered yet, so this model's .delete-button is
                 // the only existing .delete-button.
-                view.find('.delete-button').on('click', this.onDelete);
+                transactionalListen(view, '.delete-button', 'click', this.onDelete);
 
                 var addSection = function () {
                     var newSubsection = [];
@@ -58,7 +58,7 @@ var section_strategy = {
                     reRender(viewTarget);
                     signalSave();
                 };
-                view.find('.add-subsection-button').on('click', addSection);
+                transactionalListen(view, '.add-subsection-button', 'click', addSection);
 
                 var subsection_destinations = view.find('.subsection-content');
                 subsectionControllers.forEach(function (controller, i) {

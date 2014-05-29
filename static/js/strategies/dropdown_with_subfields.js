@@ -36,7 +36,7 @@ var with_subfields_options_entry_strategy = {
                 view = $(viewTarget);
                 view.html(rendered);
 
-                view.find('.delete-button').on('click', this.onDelete);
+                transactionalListen(view, '.deleteButton', 'click', this.onDelete);
 
                 var subfields_destination = view.find('.subsection-content');
                 subsection_controller.render(subfields_destination);
@@ -115,12 +115,10 @@ var options_with_subfields_strategy = {
                     signalSave();
                 };
 
-                view.find('.add-with-subfields-options-entry-button').on('click', addEntry);
-                view.find('.new-with-subfields-options-entry-input').on('keyup', function(e) {
+                transactionalListen(view, '.add-with-subfields-options-entry-button', 'click', addEntry);
+                transactionalListen(view, '.new-with-subfields-options-entry-input', 'keyup', function(e) {
                     if (e.which == 13) {
                         addEntry();
-                        // e.preventDefault();
-                        // return false;
                     }
                 });
 
@@ -198,7 +196,7 @@ var dropdown_with_subfields_strategy = {
                 // Note that the rest of the DOM, with subsequent .delete-buttons,
                 // has not been rendered yet, so this model's .delete-button is
                 // the only existing .delete-button.
-                view.find('.delete-button').on('click', this.onDelete);
+                transactionalListen(view, '.delete-button', 'click', this.onDelete);
 
                 // Note to self:
                 // In non-terminal models, this is where the sub models would render

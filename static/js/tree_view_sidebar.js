@@ -31,12 +31,6 @@ var tree_view_controller = {
             }
         };
 
-        var refreshScrollSpy = function () {
-            $('[data-spy="scroll"]').each(function () {
-                var $spy = $(this).scrollspy('refresh');
-            });
-        };
-
         var controllerObj = {
             render: function (viewTarget) {
                 var scrollTree = {};
@@ -58,7 +52,6 @@ var tree_view_controller = {
 
                 for (key in scrollTree) {
                     registerScrollTo(key, scrollTree[key]);
-                    $(scrollTree[key]).change(refreshScrollSpy);
                 }
 
                 var createScrollAction = function (sectionInfo) {
@@ -78,6 +71,12 @@ var tree_view_controller = {
                         createScrollAction(sectionLinks[i])
                     );
                 }
+            },
+
+            refreshScrollSpy: function () {
+                $('[data-spy="scroll"]').each(function () {
+                    var $spy = $(this).scrollspy('refresh');
+                });
             },
         };
 

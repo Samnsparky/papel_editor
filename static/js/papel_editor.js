@@ -197,10 +197,15 @@ var forEachOnDelete = function (controllers) {
 };
 
 var applicationController = null;
+var serverUrl = null;
+var debug = null;
 
 var loadEditor = function () {
     var application_structure = JSON.parse($('#application-structure').html());
     applicationController = createController(application_structure);
+
+    serverUrl = $('#server-url').val();
+    debug = $('#debug').val();
 
     var listingViewTemplate = $('#application-editor-template').html();
     applicationController.setTemplate(listingViewTemplate);
@@ -232,9 +237,21 @@ function syntaxHighlight(json) {
     return '<pre id="raw-json-container">' + spannedJSON + '</pre>'
 }
 
-var postToServer = function (json) {
-    // TODO: post to server, remove the raw JSON output
-    // str = str.replace('\n', '<br>');
+var postSuccess = function () {
+    console.log('post success');
+};
+
+var postToServer = function (url, json) {
+    if (debug === "true") {
+        console.log("would post to ", url);
+    }
+    else {
+        $.post(
+            url,
+            {application: JSON.stringify(json)},
+            postSuccess
+        );
+    }
     renderRawJSON(syntaxHighlight(json));
 };
 
@@ -251,31 +268,54 @@ var save = function () {
     if (applicationController.validateInput()) {
         applicationController.onSave();
         applicationController.render('#application-editor');
-        postToServer(applicationController.toJSON());
+        postToServer(serverUrl, applicationController.toJSON());
     }
 };
 
-var callOnce = function (innerFunc) {
-    var called = false;
-    return function () {
-        var retVal;
-
-        if (called)
-            return;
-
-        called = true;
-        retVal = innerFunc.apply(arguments);
-        called = false;
-        return retVal;
-    };
+var signalSave = function () {
+    afterTransaction('save', save);
 };
 
-var innerSignalSave = function () {
-    // TODO: Implement a timer or something
-    save();
+var transactionKeeper = {
+    state: 'outside transaction',
+    signals: {},
+    startTransaction: function () {
+        if (transactionKeeper.state === 'inside transaction')
+           throw 'Inside of transaction but tried starting transaction.';
+
+        transactionKeeper.state = 'inside transaction';
+        signals = [];
+    },
+    afterTransaction: function (signal, callback) {
+        if (transactionKeeper.state === 'outside transaction') {
+            console.log('Outside of transaction but tried transaction signal.');
+            // throw 'Outside of transaction but tried transaction signal.';
+        }
+
+        signals[signal] = callback;
+    },
+    endTransaction: function () {
+        for (signal in signals)
+            signals[signal]();
+        transactionKeeper.state = 'outside transaction';
+    },
+    makeTransaction: function (innerFunc) {
+        return function () {
+            transactionKeeper.startTransaction();
+            var retVal = innerFunc.apply(innerFunc, arguments);
+            transactionKeeper.endTransaction();
+            return retVal;
+        };
+    }
 };
 
-var signalSave = callOnce(innerSignalSave);
+var afterTransaction = transactionKeeper.afterTransaction;
+
+var makeTransaction = transactionKeeper.makeTransaction;
+
+var transactionalListen = function (view, selector, event, method) {
+    view.find(selector).on(event, makeTransaction(method));
+}
 
 $(function() {
     hardcodedJSONSetup();

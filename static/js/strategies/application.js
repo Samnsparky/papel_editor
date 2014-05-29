@@ -40,6 +40,7 @@ var application_strategy = {
                     'sections': model.sections
                 });
                 view = $(viewTarget);
+                view.off('change');
                 view.html(rendered);
 
                 var addSection = function () {
@@ -58,15 +59,12 @@ var application_strategy = {
                     reRender(viewTarget);
                     signalSave();
                 };
-                view.find('.add-section-button').on('click', addSection);
-                view.find('.new-section-input').on('keyup', function(e){
+                transactionalListen(view, '.add-section-button', 'click', addSection);
+                transactionalListen(view, '.new-section-input', 'keyup', function(e){
                     if (e.which == 13) {
                         addSection();
                     }
                 });
-
-                // All subviews are listened to
-                view.change(signalSave);
 
                 treeViewController.render(view.find('#tree-view-sidebar-content'));
 
@@ -74,6 +72,11 @@ var application_strategy = {
                 sectionControllers.forEach(function (controller, i) {
                     controller.render(section_destinations[i]);
                 });
+
+                treeViewController.refreshScrollSpy();
+
+                // All subviews are listened to
+                view.on('change', makeTransaction(signalSave));
             },
 
             onSave: function () {

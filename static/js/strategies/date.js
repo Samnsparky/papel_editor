@@ -44,7 +44,7 @@ var date_strategy = {
                 // Note that the rest of the DOM, with subsequent .delete-buttons,
                 // has not been rendered yet, so this model's .delete-button is
                 // the only existing .delete-button.
-                view.find('.delete-button').on('click', this.onDelete);
+                transactionalListen(view, '.delete-button', 'click', this.onDelete);
             },
 
             onSave: function () {
