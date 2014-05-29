@@ -5,7 +5,7 @@ var section_strategy = {
         return model.subsections !== undefined;
     },
 
-    createController: function (model, innerOnDelete) {
+    createController: function (model, innerOnDelete, parent) {
         var view = null;
         var subsectionControllers = [];
         var template = $('#section-template').html();
@@ -26,11 +26,13 @@ var section_strategy = {
 
         var retObj = {
             render: function reRender (viewTarget) {
+
                 var rendered = Mustache.render(
                     template,
                     {
                         'name': model.name,
                         'subsections': model.subsections,
+                        'section_id': getSectionId(parent.sections.indexOf(model)),
                     },
                     createPartials([
                         'delete_button'
@@ -42,11 +44,10 @@ var section_strategy = {
                 // Note that the rest of the DOM, with subsequent .delete-buttons,
                 // has not been rendered yet, so this model's .delete-button is
                 // the only existing .delete-button.
-                view.find('.delete-button').on('click', this.onDelete);
+                transactionalListen(view, '.delete-button', 'click', this.onDelete);
 
                 var addSection = function () {
                     var newSubsection = [];
-                    console.log(model.subsections);
                     model.subsections.push(newSubsection);
                     subsectionControllers.push(
                         subsection_strategy.createController(
@@ -57,7 +58,7 @@ var section_strategy = {
                     reRender(viewTarget);
                     signalSave();
                 };
-                view.find('.add-subsection-button').on('click', addSection);
+                transactionalListen(view, '.add-subsection-button', 'click', addSection);
 
                 var subsection_destinations = view.find('.subsection-content');
                 subsectionControllers.forEach(function (controller, i) {

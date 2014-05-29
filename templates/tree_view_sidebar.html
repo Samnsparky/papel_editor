@@ -1,0 +1,11 @@
+<script id="tree-view-sidebar-template" type="x-tmpl-mustache">
+<div id="tree-view-sidebar">
+    <ul class="affix-top nav nav-pills nav-stacked">
+        <li><a id="to-top" href="#header-bar">Top</a></li>
+        <li><a id="application-meta-link" href="#application-meta">{{ model.name }}</a></li>
+        {{#section_links}}
+        <li>{{{section}}}</li>
+        {{/section_links}}
+    </ul>
+</div>
+</script>

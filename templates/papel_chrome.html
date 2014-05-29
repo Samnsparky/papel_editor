@@ -2,6 +2,7 @@
 
 {% block styles %}
 <link rel="stylesheet" type="text/css" href="/static/css/papel_chrome.css">
+<link rel="stylesheet" type="text/css" href="/static/css/tree_view_sidebar.css">
 {% endblock %}
 
 {% block scripts %}
@@ -17,6 +18,7 @@
 <script type="text/javascript" language="javascript" src="/static/js/strategies/enumeration_table.js"></script>
 <script type="text/javascript" language="javascript" src="/static/js/strategies/dropdown_with_subfields.js"></script>
 
+<script type="text/javascript" language="javascript" src="/static/js/tree_view_sidebar.js"></script>
 <script type="text/javascript" language="javascript" src="/static/js/papel_editor.js"></script>
 
 {{ application_editor|safe }}
@@ -24,11 +26,14 @@
 {{ subsection|safe }}
 {{ fields|safe }}
 {{ components|safe }}
+{{ tree_view_sidebar|safe }}
 
 {% endblock %}
 
 {% block content %}
 <div id="application-structure"></div>
+<input type="text" id="server-url" value="{{ server_url }}">
+<input type="text" id="debug" value="{{ debug }}">
 
 <div class="row">
     <div class="col-xs-12" id="application-editor">Loading application editor...</div>

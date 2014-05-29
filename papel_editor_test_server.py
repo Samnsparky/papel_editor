@@ -24,6 +24,9 @@ def render():
     subsection = getSubHTML('templates/subsection.html')
     fields = getSubHTML('templates/fields.html')
     components = getSubHTML('templates/components.html')
+    tree_view_sidebar = getSubHTML('templates/tree_view_sidebar.html')
+    server_url = 'http://127.0.0.1:5000'
+    debug = 'true'
 
     return flask.render_template(
         'papel_chrome.html',
@@ -35,6 +38,9 @@ def render():
         subsection=subsection,
         fields=fields,
         components=components,
+        tree_view_sidebar=tree_view_sidebar,
+        server_url=server_url,
+        debug=debug
     )
 
 @app.route('/test')

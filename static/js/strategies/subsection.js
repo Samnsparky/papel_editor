@@ -37,7 +37,7 @@
                 view = $(viewTarget);
                 view.html(rendered);
 
-                view.find('.delete-button').on('click', this.onDelete);
+                transactionalListen(view, '.delete-button', 'click', this.onDelete);
 
                 var addField = function () {
                     var newType = view.find('.new-type-input').val();
@@ -56,8 +56,9 @@
                     reRender(viewTarget);
                     signalSave();
                 };
-                view.find('.add-field-button').on('click', addField);
-                view.find('.new-name-input').on('keyup', function(e){
+
+                transactionalListen(view, '.add-field-button', 'click', addField);
+                transactionalListen(view, '.new-name-input', 'keyup', function(e){
                     if (e.which == 13) {
                         addField();
                     }

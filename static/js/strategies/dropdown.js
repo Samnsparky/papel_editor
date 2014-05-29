@@ -22,7 +22,7 @@ var options_entry_controller = {
                 view = $(viewTarget);
                 view.html(rendered);
 
-                view.find('.remove-options-entry-button').on('click', this.onDelete);
+                transactionalListen(view, '.remove-options-entry-button', 'click', this.onDelete);
             },
 
             onSave: function () {
@@ -89,8 +89,8 @@ var options_strategy = {
                     signalSave();
                 };
 
-                view.find('.add-options-entry-button').on('click', addEntry);
-                view.find('.new-options-entry-input').on('keyup', function(e){
+                transactionalListen(view, '.add-options-entry-button', '.add-options-entry-button', addEntry);
+                transactionalListen(view, '.new-options-entry-input', '.new-options-entry-input', function(e){
                     if (e.which == 13) {
                         addEntry();
                     }
@@ -173,7 +173,7 @@ var dropdown_strategy = {
                 // Note that the rest of the DOM, with subsequent .delete-buttons,
                 // has not been rendered yet, so this model's .delete-button is
                 // the only existing .delete-button.
-                view.find('.delete-button').on('click', this.onDelete);
+                transactionalListen(view, '.delete-button', 'click', this.onDelete);
 
                 options_controller.render(view.find('.dropdown-options-content'));
             },
