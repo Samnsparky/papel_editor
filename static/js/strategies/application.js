@@ -101,7 +101,7 @@ var application_strategy = {
                 model.closeDate = view.find('#close-date-input').val();
                 model.closeDateHuman = view.find('#close-date-human-input').val();
 
-                forEachOnSave(sectionControllers, model.sections);
+                forEachOnSave(sectionControllers);
             },
 
             onDelete: function () {

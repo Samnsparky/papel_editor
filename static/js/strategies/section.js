@@ -19,7 +19,7 @@ var section_strategy = {
             model.subsections.map(function(subsection) {
                 return subsection_strategy.createController(
                     subsection,
-                    createInnerOnDelete(model, subsection, subsectionControllers)
+                    createInnerOnDelete(model.subsections, subsection, subsectionControllers)
                 );
             })
         );
@@ -46,7 +46,7 @@ var section_strategy = {
                 // the only existing .delete-button.
                 transactionalListen(view, '.delete-button', 'click', this.onDelete);
 
-                var addSection = function () {
+                var addSubsection = function () {
                     var newSubsection = [];
                     model.subsections.push(newSubsection);
                     subsectionControllers.push(
@@ -58,7 +58,7 @@ var section_strategy = {
                     reRender(viewTarget);
                     signalSave();
                 };
-                transactionalListen(view, '.add-subsection-button', 'click', addSection);
+                transactionalListen(view, '.add-subsection-button', 'click', addSubsection);
 
                 var subsection_destinations = view.find('.subsection-content');
                 subsectionControllers.forEach(function (controller, i) {

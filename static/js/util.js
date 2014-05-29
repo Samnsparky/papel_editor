@@ -161,7 +161,7 @@ var applyUnsetDefaults = function (model, defaults) {
     };
 };
 
-var forEachOnSave = function (controllers, parentArray) {
+var forEachOnSave = function (controllers) {
     controllers.forEach(function (controller) {
         controller.onSave();
     });
