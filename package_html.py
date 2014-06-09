@@ -119,10 +119,13 @@ def main():
     Entry point for the convienence Papel editor package HTML utility. Renders
     the papel_chrome template as a single HTML file easy to include in another
     project.
+
+    @return: Status code to report to the OS.
+    @rtype: int
     """
     if len(sys.argv) != 7:
         print USAGE_STR
-        return
+        return -1
 
     server_url = sys.argv[1]
     startup_json = sys.argv[2]
@@ -142,6 +145,8 @@ def main():
     with open(output_path, 'w') as f:
         f.write(final_html)
 
+    return 0
+
 
 if __name__ == '__main__':
-    main()
+    sys.exit(main())
