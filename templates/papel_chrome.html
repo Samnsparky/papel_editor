@@ -1,26 +1,26 @@
 {% extends "base.html" %}
 
 {% block styles %}
-<link rel="stylesheet" type="text/css" href="/static/css/papel_chrome.css">
-<link rel="stylesheet" type="text/css" href="/static/css/tree_view_sidebar.css">
+<link rel="stylesheet" type="text/css" href="{{ base_url }}/static/css/papel_chrome.css">
+<link rel="stylesheet" type="text/css" href="{{ base_url }}/static/css/tree_view_sidebar.css">
 {% endblock %}
 
 {% block scripts %}
-<script type="text/javascript" language="javascript" src="/static/js/strategies/application.js"></script>
-<script type="text/javascript" language="javascript" src="/static/js/strategies/subsection.js"></script>
-<script type="text/javascript" language="javascript" src="/static/js/strategies/section.js"></script>
-<script type="text/javascript" language="javascript" src="/static/js/strategies/text.js"></script>
-<script type="text/javascript" language="javascript" src="/static/js/strategies/dropdown.js"></script>
-<script type="text/javascript" language="javascript" src="/static/js/strategies/number.js"></script>
-<script type="text/javascript" language="javascript" src="/static/js/strategies/date.js"></script>
-<script type="text/javascript" language="javascript" src="/static/js/strategies/phone_number.js"></script>
-<script type="text/javascript" language="javascript" src="/static/js/strategies/essay.js"></script>
-<script type="text/javascript" language="javascript" src="/static/js/strategies/enumeration_table.js"></script>
-<script type="text/javascript" language="javascript" src="/static/js/strategies/dropdown_with_subfields.js"></script>
+<script type="text/javascript" language="javascript" src="{{ base_url }}/static/js/strategies/application.js"></script>
+<script type="text/javascript" language="javascript" src="{{ base_url }}/static/js/strategies/subsection.js"></script>
+<script type="text/javascript" language="javascript" src="{{ base_url }}/static/js/strategies/section.js"></script>
+<script type="text/javascript" language="javascript" src="{{ base_url }}/static/js/strategies/text.js"></script>
+<script type="text/javascript" language="javascript" src="{{ base_url }}/static/js/strategies/dropdown.js"></script>
+<script type="text/javascript" language="javascript" src="{{ base_url }}/static/js/strategies/number.js"></script>
+<script type="text/javascript" language="javascript" src="{{ base_url }}/static/js/strategies/date.js"></script>
+<script type="text/javascript" language="javascript" src="{{ base_url }}/static/js/strategies/phone_number.js"></script>
+<script type="text/javascript" language="javascript" src="{{ base_url }}/static/js/strategies/essay.js"></script>
+<script type="text/javascript" language="javascript" src="{{ base_url }}/static/js/strategies/enumeration_table.js"></script>
+<script type="text/javascript" language="javascript" src="{{ base_url }}/static/js/strategies/dropdown_with_subfields.js"></script>
 
-<script type="text/javascript" language="javascript" src="/static/js/tree_view_sidebar.js"></script>
-<script type="text/javascript" language="javascript" src="/static/js/util.js"></script>
-<script type="text/javascript" language="javascript" src="/static/js/papel_editor.js"></script>
+<script type="text/javascript" language="javascript" src="{{ base_url }}/static/js/tree_view_sidebar.js"></script>
+<script type="text/javascript" language="javascript" src="{{ base_url }}/static/js/util.js"></script>
+<script type="text/javascript" language="javascript" src="{{ base_url }}/static/js/papel_editor.js"></script>
 
 {{ application_editor|safe }}
 {{ section|safe }}
