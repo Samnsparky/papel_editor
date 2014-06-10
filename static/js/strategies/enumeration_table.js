@@ -64,7 +64,6 @@ var enumeration_table_strategy = {
             },
 
             onSave: function () {
-                model.type = view.find('.type-input').val();
                 model.name = view.find('.name-input').val();
                 model.required = view.find('.required-input').is(':checked');
                 model.itemType = view.find('.item-type-input').val();

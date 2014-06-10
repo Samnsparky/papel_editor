@@ -25,7 +25,7 @@ var text_strategy = {
             render: function (viewTarget) {
                 var rendered = Mustache.render(template,
                     {
-                        'type': model.type,
+                        'item_type': model.type,
                         'type_text': true,
                         'name': model.name,
                         'show_caption': model.showCaption,
@@ -58,7 +58,6 @@ var text_strategy = {
             },
 
             onSave: function () {
-                model.type = view.find('.type-input').val();
                 model.name = view.find('.name-input').val();
                 model.showCaption = view.find('.show-caption-input').is(':checked');
                 model.required = view.find('.required-input').is(':checked');
