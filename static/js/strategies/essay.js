@@ -24,8 +24,6 @@ var essay_strategy = {
             render: function (viewTarget) {
                 var rendered = Mustache.render(template,
                     {
-                        'type': model.type,
-                        'type_essay': true,
                         'name': model.name,
                         'show_caption': model.showCaption,
                         'character_limit': model.characterLimit,
@@ -33,7 +31,6 @@ var essay_strategy = {
                     },
                     createPartials([
                         'delete_button',
-                        'type',
                         'name',
                         'show_caption',
                         'prompt',
