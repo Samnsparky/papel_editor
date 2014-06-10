@@ -180,7 +180,6 @@ var dropdown_strategy = {
             },
 
             onSave: function () {
-                model.type = view.find('.type-input').val();
                 model.name = view.find('.name-input').val();
                 model.showCaption = view.find('.show-caption-input').is(':checked');
                 model.required = view.find('.required-input').is(':checked');
