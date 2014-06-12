@@ -1,17 +1,5 @@
-#application-structure {
-    display:none;
-}
-
-#server-url {
-    display:none;
-}
-
-#debug {
-    display:none;
-}
-
-#raw-json-view {
-    margin-top: 50px;
+.hidden-date {
+    display: none;
 }
 
 .section-content {
@@ -36,11 +24,27 @@
 }
 
 .remove-span-custom {
-    padding: 0;
     border: none;
+    padding: 0;
 }
 
 .remove-options-entry-button {
-    border-top-right-radius: 4px !important;
     border-bottom-right-radius: 4px !important;
+    border-top-right-radius: 4px !important;
+}
+
+#application-structure {
+    display: none;
+}
+
+#server-url {
+    display: none;
+}
+
+#debug {
+    display: none;
+}
+
+#raw-json-view {
+    margin-top: 50px;
 }

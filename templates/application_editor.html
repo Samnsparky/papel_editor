@@ -2,19 +2,19 @@
 <div id="application-meta" class="row">
     <div class="col-xs-9">
         <h2>Application: {{ name }}</h2>
-        <div class="form-group">
+        <div class="form-group hidden-date">
             <label for="open-date-input">Open Date</label>
             <input id="open-date-input" type="date" class="form-control" value="{{ openDate }}">
         </div>
-        <div class="form-group">
+        <div class="form-group hidden-date">
             <label for="open-date-human-input">Open Date Human</label>
             <input id="open-date-human-input" type="text" class="form-control" value="{{ openDateHuman }}">
         </div>
-        <div class="form-group">
+        <div class="form-group hidden-date">
             <label for="close-date-input">Close Date</label>
             <input id="close-date-input" type="date" class="form-control" value="{{ closeDate }}">
         </div>
-        <div class="form-group">
+        <div class="form-group hidden-date">
             <label for="close-date-human-input">Close Date Human</label>
             <input id="close-date-human-input" type="text" class="form-control" value="{{ closeDateHuman }}">
         </div>
@@ -23,7 +23,7 @@
             <div class="section-content">Section loading...</div>
             {{/sections}}
         </div>
-        <div class="form-inline">
+        <div class="form-inline new-node-form">
             <input type="text" class="new-section-input form-control" placeholder="New section name">
             <button type="button" class="add-section-button form-control btn btn-default">Add section</button>
         </div>
