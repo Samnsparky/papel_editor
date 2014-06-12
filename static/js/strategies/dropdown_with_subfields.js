@@ -183,15 +183,12 @@ var dropdown_with_subfields_strategy = {
             render: function (viewTarget) {
                 var rendered = Mustache.render(template,
                     {
-                        'type': DROPDOWN_WITH_SUBFIELDS_TYPE,
-                        'type_dropdown_with_subfields': true,
                         'name': model.name,
                         'required': model.required,
                         'options': model.options,
                     },
                     createPartials([
                         'delete_button',
-                        'type',
                         'name',
                         'required',
                     ])
