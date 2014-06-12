@@ -24,15 +24,12 @@ var date_strategy = {
                 var rendered = Mustache.render(
                     template,
                     {
-                        'type': model.type,
-                        'type_date': true,
                         'name': model.name,
                         'show_caption': model.showCaption,
                         'required': model.required,
                     },
                     createPartials([
                         'delete_button',
-                        'type',
                         'name',
                         'show_caption',
                         'required',

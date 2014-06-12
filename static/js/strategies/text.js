@@ -25,8 +25,6 @@ var text_strategy = {
             render: function (viewTarget) {
                 var rendered = Mustache.render(template,
                     {
-                        'item_type': model.type,
-                        'type_text': true,
                         'name': model.name,
                         'show_caption': model.showCaption,
                         'required': model.required,
@@ -36,7 +34,6 @@ var text_strategy = {
                     },
                     createPartials([
                         'delete_button',
-                        'type',
                         'name',
                         'show_caption',
                         'required',

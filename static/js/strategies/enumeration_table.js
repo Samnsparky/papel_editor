@@ -32,8 +32,6 @@ var enumeration_table_strategy = {
             render: function (viewTarget) {
                 var rendered = Mustache.render(template,
                     {
-                        'type': model.type,
-                        'type_enumeration_table': true,
                         'name': model.name,
                         'required': model.required,
                         'item_type': model.itemType,
@@ -41,7 +39,6 @@ var enumeration_table_strategy = {
                     },
                     createPartials([
                         'delete_button',
-                        'type',
                         'name',
                         'required',
                         'item_type',
